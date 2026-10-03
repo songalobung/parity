@@ -1,0 +1,47 @@
+# Parity Model Priors
+# All coefficients and parameters below are documented priors, not empirically fitted values.
+# When empirical calibration is run or user datasets are provided, fitted parameters can be compared against these priors.
+
+devaluation_event:
+  # Prior: Exchange rate depreciation threshold defining a discrete devaluation event.
+  # Depreciation > 15% in a single month or > 25% over 3 months constitutes an event.
+  monthly_depreciation_threshold: 0.15 # Prior: 15% 1-month depreciation
+  three_month_depreciation_threshold: 0.25 # Prior: 25% 3-month cumulative depreciation
+
+devaluation_probability:
+  # Prior coefficients for logistic regression on lagged macro indicators
+  # Expected signs:
+  #   parallel_premium: positive (+)
+  #   reserves_months_imports: negative (-)
+  #   reserves_change_3m_pct: negative (-)
+  #   current_account_pct_gdp: negative (-) [i.e. larger deficit increases risk]
+  #   rer_misalignment: positive (+)
+  #   rate_differential: negative (-) [higher domestic rate defense decreases risk]
+  #   imf_program: negative (-)
+  #   imf_review_off_track: positive (+)
+  intercept_12m: -2.0 # Prior: baseline annual probability around 12% in absence of stress
+  intercept_24m: -1.2 # Prior: baseline 24-month probability around 23%
+  coef_parallel_premium: 3.5 # Prior: parallel spread is the strongest early warning signal
+  coef_reserves_cover: -0.4 # Prior: reserves cover buffers external shocks
+  coef_reserves_change_3m: -1.5 # Prior: reserve drain precedes devaluation
+  coef_ca_pct_gdp: -0.08 # Prior: wider current account deficit increases pressure
+  coef_rer_misalignment: 1.2 # Prior: overvalued real exchange rate pressures peg
+  coef_rate_differential: -0.05 # Prior: carry / policy defense reduces odds
+  coef_imf_program: -0.6 # Prior: IMF presence provides external liquidity buffer
+  coef_imf_review_off_track: 1.0 # Prior: derailed review accelerates external adjustment
+
+magnitude_model:
+  # Prior distributions for devaluation size given an event
+  # Magnitude tends to close a large fraction of the parallel-market premium
+  premium_passthrough_mean: 0.70 # Prior: official rate devalues to close ~70% of parallel gap
+  peg_break_base_jump: 0.35 # Prior: breaking a hard peg yields ~35% average jump
+  managed_crawl_base_jump: 0.20 # Prior: managed crawl adjustment averages ~20%
+  float_overshoot_base_jump: 0.40 # Prior: unpegging / floating yields ~40% average jump
+  shape_param_lognormal_sigma: 0.30 # Prior: lognormal dispersion of jump size
+
+fx_path_simulation:
+  n_paths: 10000 # Default Monte Carlo iterations
+  calm_volatility_annual: 0.06 # Prior: annual volatility during calm / normal regime (~6%)
+  ppp_passthrough_drift: 0.85 # Prior: 85% of inflation differential feeds into normal crawl
+  post_jump_retracement: 0.15 # Prior: 15% mean retracement after float overshoot
+  adjustment_months: 6 # Prior: post-jump adjustment duration in months

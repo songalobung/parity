@@ -1,0 +1,8 @@
+# Deal configuration template
+country: "Nigeria"
+close_date: "2026-01-31"
+hurdle_usd_irr: 0.15
+repatriation_rate: "blend" # Options: official | parallel | blend
+repatriation_blend_weight: 0.5 # Applicable if repatriation_rate is blend (0.0 to 1.0)
+blocked_funds_haircut_pct: 0.05 # Haircut for illiquidity/capital controls (e.g. 0.05 = 5%)
+withholding_tax_pct: 0.10 # Cross-border withholding tax rate (e.g. 0.10 = 10%)

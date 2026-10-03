@@ -1,0 +1,35 @@
+# Parity Scenario Switchboard Configurations
+# Overrides applied to baseline features or simulated paths
+
+scenarios:
+  base:
+    description: "Baseline scenario using current panel fundamentals and path simulation"
+    overrides: {}
+
+  imf_program_lost:
+    description: "IMF program derails: imf_program set to 0 and imf_review_on_track set to 0"
+    overrides:
+      imf_program: 0
+      imf_review_on_track: 0
+
+  premium_widens:
+    description: "Parallel market spread widens by +15 percentage points"
+    overrides:
+      parallel_premium_delta: 0.15
+
+  step_devaluation:
+    description: "Forced discrete devaluation of 30% occurring at month 12"
+    overrides:
+      force_jump_month: 12
+      force_jump_size: 0.30
+
+  slow_crawl:
+    description: "Managed depreciation at steady 8% annualized crawl"
+    overrides:
+      forced_annual_depreciation: 0.08
+
+  float_and_overshoot:
+    description: "Sudden float causing 40% initial depreciation followed by 15% retracement"
+    overrides:
+      force_jump_size: 0.40
+      post_jump_retracement: 0.15
