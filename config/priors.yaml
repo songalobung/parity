@@ -40,7 +40,7 @@ magnitude_model:
   shape_param_lognormal_sigma: 0.30 # Prior: lognormal dispersion of jump size
 
 fx_path_simulation:
-  n_paths: 10000 # Default Monte Carlo iterations
+  n_paths: 100000 # Default Monte Carlo iterations (100k)
   calm_volatility_annual: 0.06 # Prior: annual volatility during calm / normal regime (~6%)
   ppp_passthrough_drift: 0.85 # Prior: 85% of inflation differential feeds into normal crawl
   post_jump_retracement: 0.15 # Prior: 15% mean retracement after float overshoot

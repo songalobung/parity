@@ -217,7 +217,7 @@ def deal(
     scenario: str = typer.Option("base", "--scenario", "-s", help="Scenario name."),
     scenarios_config: Optional[Path] = typer.Option(None, "--scenarios-config", help="Path to scenarios.yaml."),
     priors: Optional[Path] = typer.Option(None, "--priors", help="Path to priors.yaml."),
-    paths: int = typer.Option(10000, "--paths", "-n", help="Number of Monte Carlo paths."),
+    paths: int = typer.Option(100000, "--paths", "-n", help="Number of Monte Carlo paths."),
     seed: int = typer.Option(42, "--seed", help="RNG seed."),
 ) -> None:
     """Stress-test deal cash flows against simulated FX trajectories."""
@@ -299,7 +299,7 @@ def compare(
     ),
     panel: Optional[Path] = typer.Option(None, "--panel", help="Path to fx_panel.csv."),
     scenarios_config: Optional[Path] = typer.Option(None, "--scenarios-config", help="Path to scenarios.yaml."),
-    paths: int = typer.Option(5000, "--paths", "-n", help="Number of simulated paths."),
+    paths: int = typer.Option(100000, "--paths", "-n", help="Number of simulated paths."),
     seed: int = typer.Option(42, "--seed", help="RNG seed."),
 ) -> None:
     """Compare deal performance across multiple stress scenarios."""
@@ -361,7 +361,7 @@ def report(
     scenarios_config: Optional[Path] = typer.Option(None, "--scenarios-config", help="Path to scenarios.yaml."),
     priors: Optional[Path] = typer.Option(None, "--priors", help="Path to priors.yaml."),
     format: Optional[str] = typer.Option(None, "--format", "-f", help="Output format: 'markdown' or 'excel'."),
-    paths: int = typer.Option(10000, "--paths", "-n", help="Number of Monte Carlo paths."),
+    paths: int = typer.Option(100000, "--paths", "-n", help="Number of Monte Carlo paths."),
     seed: int = typer.Option(42, "--seed", help="RNG seed."),
 ) -> None:
     """Generate an institutional Investment Committee report in Markdown or Excel."""

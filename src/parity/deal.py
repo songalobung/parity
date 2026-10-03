@@ -339,8 +339,17 @@ def calculate_breakeven_lcu_irr(
     # If target_confidence = 0.75 -> 25th percentile (75% of paths beat the hurdle)
     q = (1.0 - target_confidence) * 100.0
 
+    # For large N (e.g. 100k paths), subsample up to 10k paths for the iterative root solver
+    if N > 10000:
+        sub_idx = np.linspace(0, N - 1, 10000, dtype=int)
+        sub_inflows = base_inflows[sub_idx]
+        sub_outflows = base_outflows[sub_idx]
+    else:
+        sub_inflows = base_inflows
+        sub_outflows = base_outflows
+
     def objective(k: float) -> float:
-        scaled_cfs = base_outflows + float(k) * base_inflows
+        scaled_cfs = sub_outflows + float(k) * sub_inflows
         irrs = calculate_irrs_vectorized(scaled_cfs)
         achieved_irr = float(np.percentile(irrs, q))
         return achieved_irr - hurdle
@@ -374,7 +383,7 @@ def analyze_deal(
     sim_result: Optional[SimulationResult] = None,
     spot_rate: Optional[float] = None,
     parallel_premium: float = 0.0,
-    n_paths: int = 10000,
+    n_paths: int = 100000,
     seed: Optional[int] = 42,
 ) -> DealAnalysisResult:
     """Run end-to-end deal return stress-testing against simulated FX paths.
@@ -391,7 +400,7 @@ def analyze_deal(
         Spot exchange rate if sim_result is generated on the fly.
     parallel_premium : float, default 0.0
         Parallel market spread.
-    n_paths : int, default 10000
+    n_paths : int, default 100000
         Number of Monte Carlo paths if simulating.
     seed : Optional[int], default 42
         RNG seed for reproducibility.

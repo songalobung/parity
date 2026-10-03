@@ -60,7 +60,7 @@ def run_scenario(
     scenarios_path: Optional[Union[str, Path]] = None,
     devaluation_model: Optional[DevaluationModel] = None,
     magnitude_model: Optional[MagnitudeModel] = None,
-    n_paths: int = 10000,
+    n_paths: int = 100000,
     seed: Optional[int] = 42,
 ) -> DealAnalysisResult:
     """Run deal stress testing pipeline under a specific named scenario.
@@ -83,7 +83,7 @@ def run_scenario(
         Devaluation model instance.
     magnitude_model : Optional[MagnitudeModel], default None
         Magnitude model instance.
-    n_paths : int, default 10000
+    n_paths : int, default 100000
         Number of Monte Carlo paths.
     seed : Optional[int], default 42
         Random seed for reproducibility.
@@ -166,7 +166,7 @@ def run_scenario_switchboard(
     spot_rate: float = 100.0,
     selected_scenarios: Optional[List[str]] = None,
     scenarios_path: Optional[Union[str, Path]] = None,
-    n_paths: int = 10000,
+    n_paths: int = 100000,
     seed: Optional[int] = 42,
 ) -> Tuple[pd.DataFrame, Dict[str, DealAnalysisResult]]:
     """Execute scenario switchboard across multiple scenarios and construct comparison table.
@@ -185,7 +185,7 @@ def run_scenario_switchboard(
         List of scenario names to evaluate. If None, runs all available in scenarios.yaml.
     scenarios_path : Optional[Union[str, Path]], default None
         Path to scenarios.yaml.
-    n_paths : int, default 10000
+    n_paths : int, default 100000
         Number of simulated paths.
     seed : Optional[int], default 42
         RNG seed for reproducibility.

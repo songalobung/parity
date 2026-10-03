@@ -12,7 +12,7 @@
 
 <p align="center">
   <b>Evaluate the real dollar performance of frontier and emerging market investments.</b><br>
-  Simulate 10,000+ macroeconomic FX trajectories, model discrete devaluation hazards, incorporate parallel-market repatriation and trapped capital haircuts, and generate board-ready Investment Committee reports.
+  Simulate 100,000+ macroeconomic FX trajectories, model discrete devaluation hazards, incorporate parallel-market repatriation and trapped capital haircuts, and generate board-ready Investment Committee reports.
 </p>
 
 </div>
@@ -361,10 +361,10 @@ TOP MACRO RISK DRIVERS:
 
 ### 3. Stress-Test Deal Cash Flows (`parity deal`)
 
-Simulates 10,000 Monte Carlo paths and converts deal flows under the specified repatriation mechanics:
+Simulates 100,000 Monte Carlo paths and converts deal flows under the specified repatriation mechanics:
 
 ```powershell
-parity deal --deal data/templates/deal.csv --config data/templates/deal.yaml --paths 10000
+parity deal --deal data/templates/deal.csv --config data/templates/deal.yaml --paths 100000
 ```
 
 ---
@@ -441,13 +441,13 @@ from parity.report import save_report, compute_top_risk_drivers
 deal_df = load_deal_cash_flows("data/templates/deal.csv")
 deal_cfg = load_deal_config("data/templates/deal.yaml")
 
-# 2. Execute Simulation (10,000 Monte Carlo Paths)
+# 2. Execute Simulation (100,000 Monte Carlo Paths)
 res = analyze_deal(
     deal_df=deal_df,
     deal_config=deal_cfg,
     spot_rate=1545.0,
     parallel_premium=0.18,
-    n_paths=10000,
+    n_paths=100000,
     seed=42,
 )
 

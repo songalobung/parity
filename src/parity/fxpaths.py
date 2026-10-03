@@ -76,7 +76,7 @@ class SimulationResult:
 def simulate_fx_paths(
     spot_rate: float,
     n_months: int = 60,
-    n_paths: int = 10000,
+    n_paths: int = 100000,
     devaluation_model: Optional[DevaluationModel] = None,
     magnitude_model: Optional[MagnitudeModel] = None,
     features_obs: Optional[Dict[str, float]] = None,
@@ -100,7 +100,7 @@ def simulate_fx_paths(
         Current spot exchange rate (LCU per USD).
     n_months : int, default 60
         Forecast horizon in months.
-    n_paths : int, default 10000
+    n_paths : int, default 100000
         Number of Monte Carlo paths.
     devaluation_model : Optional[DevaluationModel], default None
         Fitted or prior devaluation hazard model.
